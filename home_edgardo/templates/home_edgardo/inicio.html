@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Inicio - Catálogo de Géneros{% endblock %}
+
+{% block contenido %}
+<div class="text-center mb-5">
+    <h1 class="display-4 fw-bold">Bienvenido a cinepolis</h1>
+    <p class="lead text-muted">Selecciona uno de los géneros disponibles para explorar nuestro catálogo de películas.</p>
+</div>
+
+<div class="row justify-content-center">
+    {% if generos %}
+        {% for g in generos %}
+        <div class="col-md-5 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <h3 class="card-title fw-bold text-primary">{{ g.nombre }}</h3>
+                    <p class="card-text text-secondary mt-3">{{ g.descripcion }}</p>
+                    <a href="{% url 'home_edgardo:peliculas' g.id %}" class="btn btn-primary px-4 mt-2">
+                        Ver Películas
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12 text-center">
+            <div class="alert alert-warning">No hay géneros disponibles en este momento.</div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
